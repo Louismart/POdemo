@@ -1,6 +1,7 @@
 
 
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -28,27 +29,34 @@ public class GogleTestPage {
     private ChromeDriver driver;
 
 
-    @BeforeSuite     //Managing commands by Chromedriver
+    @BeforeSuite
     public void beforeSuite(){
-        System.setProperty("webdriver.chrome.driver", "C://bin/chromedriver//chromedriver.exe");
+
     }
     @BeforeTest
     public void setUp(){
+        WebDriverManager.chromedriver().version("79.0.3945.36").setup();
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://google.pl");
     }
 
 
     @Test
     public void testSearch(){
-        HomePage home = new HomePage(driver); //Show our starting page and output Driver parameters
-        ResultPage result = home.search("automated testing info"); // The homepage will return us a result/ realize code in search method
-        Assert.assertTrue(result.getFirstLink().contains("automated"));   // Check the first link which contains "automated"
+        //Arrange
+        driver.get("http://google.pl");
+        //Act
+        ResultPage result = new HomePage(driver).search("automated testing info");
+        //Assert
+        Assert.assertTrue(result.getResults().get(0).getText().contains("automated"));
    }
+   @Test
+   public void testSearch2() {
+
+   }
+
     @AfterTest
     public void tearDown(){
-        driver.close();
+        if (driver != null) driver.quit();
     }
 }
 

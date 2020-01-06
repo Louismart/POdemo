@@ -5,19 +5,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Collection;
+import java.util.List;
 
 public class ResultPage {
     private WebDriver driver;
     private WebDriverWait wait;
-    private By firstlink = By.xpath("//*[@class='bkWMgd']/div[@class='g']//a/h");
+    private  By resultsLocator = By.xpath("//h3");
 
     public ResultPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, 10);
     }
 
-    public String getFirstLink() {
-        WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(firstlink));
-        return  wait.until(ExpectedConditions.visibilityOf(result)).getText();  ////*[@id='rso']//a[1]
+    public List<WebElement> getResults(){
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(resultsLocator));
     }
 }
