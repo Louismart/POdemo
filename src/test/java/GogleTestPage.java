@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /* Requirements:
    Given User is on Google home page
    When I search text "automated text info"
-   Then I should see first link conrains text "automated"
+   Then I should see first link contains text "automated"
    -----------------------------------------------------------------------------------------------------
    Hints:
    The Class implements the Page
