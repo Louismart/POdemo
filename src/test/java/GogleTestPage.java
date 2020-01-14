@@ -41,7 +41,7 @@ public class GogleTestPage {
 
 
     @Test
-    public void testSearch(){
+    public void testSearch1(){
         //Arrange
         driver.get("http://google.pl");
         //Act
@@ -51,6 +51,12 @@ public class GogleTestPage {
    }
    @Test
    public void testSearch2() {
+       driver.get("http://google.pl");
+       //Act
+       ResultPage result = new HomePage(driver).search("automated testing info");
+       //Assert
+       //Assert.assertTrue(result.getFirstlink().contains("automated"));
+
 
    }
 
